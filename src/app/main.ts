@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
-import { addProduct, products } from "./products/product.service";
+import { addProduct, products, updateProduct } from "./products/product.service";
+
 
 for (let index = 0; index < 50; index++) {
   addProduct({
-    id: faker.datatype.uuid(),
     title: faker.commerce.productName(),
     image: faker.image.imageUrl(),
     color: faker.color.human(),
@@ -12,16 +12,18 @@ for (let index = 0; index < 50; index++) {
     description: faker.commerce.productDescription(),
     stock: faker.datatype.number({min:10, max:100}),
     tags: faker.helpers.arrayElements(),
-    createdAt: faker.date.recent(),
-    updatedAt: faker.date.recent(),
-    category: {
-      id: faker.datatype.uuid(),
-      title: faker.commerce.department(),
-      createdAt: faker.date.recent(),
-      updatedAt: faker.date.recent(),
-    }
+    categoryId: faker.datatype.uuid()
   });
 
 }
 
 console.log(products);
+
+const product = products[0];
+const editP = updateProduct(product.id, {
+  title: 'New title #2',
+  stock: 155
+});
+
+console.log("======================");
+console.log("PRODUCT", editP);
