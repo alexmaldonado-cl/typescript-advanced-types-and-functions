@@ -9,3 +9,9 @@ type examplePick = Pick<Product, 'color' | 'description'>;
 export interface UpdateProductDTO extends Partial <CreateProductDTO> {}
 
 type exampleRequired = Required<Product>;
+
+export interface FindProductDto extends Readonly<Partial<Omit<Product, 'tags'>>> {
+  // readonly tags: ReadonlyArray<string>;
+}
+
+type exampleReadonly = Readonly<Product>;
